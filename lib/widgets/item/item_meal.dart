@@ -2,16 +2,29 @@ import 'package:flutter/material.dart';
 import '../screen/display/display_image_meal.dart';
 import '../screen/display/display_title_meal.dart';
 import '../screen/display/display_info_meal.dart';
+import '../screen/display/display_full_details_meal.dart';
 
 class ItemMeal extends StatelessWidget {
   final data;
   ItemMeal({required this.data});
 
-  void _selectMeal() {}
+  void _selectMeal(BuildContext ctx) {
+    Navigator.of(ctx).pushNamed(
+      DisplayFullDetailsMeal.routeName,
+      arguments: {
+        'data': {
+          'id': data['id'],
+          'title': data['title'],
+          'color': data['color'],
+        },
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _selectMeal(),
+      onTap: () => _selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),

@@ -22,11 +22,13 @@ class DisplayCategoryMeals extends StatelessWidget {
         itemBuilder: (ctx, index) {
           final meal = categoryMeals[index];
           return ItemMeal(data: {
+            'id': meal.id,
             'title': meal.title,
             'imageUrl': meal.imageUrl,
             'duration': meal.duration,
             'affordability': meal.affordability,
             'complexity': meal.complexity,
+            'color': routeArgs['color'],
           });
         },
         itemCount: categoryMeals.length,
