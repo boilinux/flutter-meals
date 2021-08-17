@@ -1,12 +1,10 @@
-import '../item/category_item.dart';
+import '../../item/category_item.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/category.dart';
-import '../../models/dummy_data.dart';
+import '../../../models/category.dart';
+import '../../../models/dummy_data.dart';
 
-class CategoryScreen extends StatelessWidget {
-  // const CategoryScreen({ Key? key }) : super(key: key);
-//
+class MainCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
