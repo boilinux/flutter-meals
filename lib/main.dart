@@ -15,10 +15,23 @@ class MyApp extends StatelessWidget {
       title: 'Meals',
       home: CategoryScreen(),
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.pink,
+        accentColor: Colors.amber,
+        canvasColor: Color.fromRGBO(255, 254, 229, 1),
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
+              bodyText1: TextStyle(
+                color: Color.fromRGBO(20, 51, 51, 1),
+              ),
+              bodyText2: TextStyle(
+                color: Color.fromRGBO(20, 51, 51, 1),
+              ),
               headline6: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.normal,
+                fontSize: 18,
+              ),
+              headline1: TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
@@ -28,7 +41,8 @@ class MyApp extends StatelessWidget {
             textTheme: ThemeData.light().textTheme.copyWith(
                   headline6: TextStyle(
                     fontFamily: 'OpenSans',
-                    fontSize: 20,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 24,
                   ),
                   button: TextStyle(
                     color: Colors.purple,
