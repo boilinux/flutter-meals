@@ -8,9 +8,9 @@ class MainCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Meals'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Meals'),
+      // ),
       body: GridView(
         padding: EdgeInsets.all(15),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
