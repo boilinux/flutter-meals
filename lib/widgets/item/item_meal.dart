@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../screen/display/display_image_meal.dart';
 import '../screen/display/display_title_meal.dart';
 import '../screen/display/display_info_meal.dart';
-import '../screen/display/display_full_details_meal.dart';
+import '../screen/display/full_content/display_full_details_meal.dart';
 
 class ItemMeal extends StatelessWidget {
   final data;

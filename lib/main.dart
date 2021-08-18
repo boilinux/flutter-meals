@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'widgets/screen/main/main_category.dart';
 import 'widgets/screen/display/display_category_meals.dart';
-import 'widgets/screen/display/display_full_details_meal.dart';
+import 'widgets/screen/display/full_content/display_full_details_meal.dart';
 
 void main() {
   runApp(MyApp());
@@ -52,6 +52,14 @@ class MyApp extends StatelessWidget {
         '/': (ctx) => MainCategory(),
         DisplayCategoryMeals.routeName: (ctx) => DisplayCategoryMeals(),
         DisplayFullDetailsMeal.routeName: (ctx) => DisplayFullDetailsMeal(),
+      },
+      onGenerateRoute: (e) {
+        print(e.arguments);
+
+        return MaterialPageRoute(builder: (ctx) => MainCategory());
+      },
+      onUnknownRoute: (e) {
+        return MaterialPageRoute(builder: (ctx) => MainCategory());
       },
     );
   }
