@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../main/main_category.dart';
 import './tab_favorites.dart';
+import '../drawer/main_drawer.dart';
 
 class DisplayBottommTab extends StatefulWidget {
   const DisplayBottommTab({Key? key}) : super(key: key);
@@ -36,6 +37,7 @@ class _DisplayBottommTabState extends State<DisplayBottommTab> {
       appBar: AppBar(
         title: Text(_pages[_selectedPageIndex]['title']),
       ),
+      drawer: MainDrawer(),
       body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
           onTap: _selectPage,
