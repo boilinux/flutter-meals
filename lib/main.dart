@@ -4,6 +4,7 @@ import 'widgets/screen/main/main_category.dart';
 import 'widgets/screen/display/display_category_meals.dart';
 import 'widgets/screen/display/full_content/display_full_details_meal.dart';
 import 'widgets/screen/display/tab/display_tab.dart';
+import 'widgets/screen/display/tab/display_bottom_tab.dart';
 
 void main() {
   runApp(MyApp());
@@ -50,7 +51,8 @@ class MyApp extends StatelessWidget {
                 )),
       ),
       routes: {
-        '/': (ctx) => DisplayTab(),
+        // '/': (ctx) => DisplayTab(),
+        '/': (ctx) => DisplayBottommTab(),
         DisplayCategoryMeals.routeName: (ctx) => DisplayCategoryMeals(),
         DisplayFullDetailsMeal.routeName: (ctx) => DisplayFullDetailsMeal(),
       },
