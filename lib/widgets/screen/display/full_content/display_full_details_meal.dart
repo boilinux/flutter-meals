@@ -97,6 +97,12 @@ class DisplayFullDetailsMeal extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.delete),
+        onPressed: () {
+          Navigator.of(context).pop(data['id']);
+        },
+      ),
     );
   }
 }

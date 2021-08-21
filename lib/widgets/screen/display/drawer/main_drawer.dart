@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../display_filters.dart';
+
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
 
-  Widget buildListTiles(String title, IconData icon) {
+  Widget buildListTiles(String title, IconData icon, Function tapHandler) {
     return ListTile(
       leading: Icon(
         icon,
@@ -15,7 +17,7 @@ class MainDrawer extends StatelessWidget {
           fontSize: 24,
         ),
       ),
-      onTap: () {},
+      onTap: () => tapHandler(),
     );
   }
 
@@ -29,20 +31,36 @@ class MainDrawer extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(20),
             alignment: Alignment.centerLeft,
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+            ),
             child: Text(
-              'Test',
+              'What\'s cooking?',
               style: TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 30,
-                color: Theme.of(context).accentColor,
-              ),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  color: Theme.of(context).accentColor),
             ),
           ),
           SizedBox(
             height: 20,
           ),
-          buildListTiles('Meals', Icons.restaurant),
-          buildListTiles('Filters', Icons.settings),
+          buildListTiles('Meals', Icons.restaurant, () {
+            Navigator.of(context).pushReplacementNamed(
+              '/',
+              arguments: {
+                'data': {},
+              },
+            );
+          }),
+          buildListTiles('Filters', Icons.settings, () {
+            Navigator.of(context).pushReplacementNamed(
+              DisplayFilters.routeName,
+              arguments: {
+                'data': {},
+              },
+            );
+          }),
         ],
       ),
     );

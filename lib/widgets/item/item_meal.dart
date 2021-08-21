@@ -6,7 +6,8 @@ import '../screen/display/full_content/display_full_details_meal.dart';
 
 class ItemMeal extends StatelessWidget {
   final data;
-  ItemMeal({required this.data});
+  final Function removeItem;
+  ItemMeal({required this.data, required this.removeItem});
 
   void _selectMeal(BuildContext ctx) {
     Navigator.of(ctx).pushNamed(
@@ -18,7 +19,11 @@ class ItemMeal extends StatelessWidget {
           'color': data['color'],
         },
       },
-    );
+    ).then((value) {
+      if (value != null) {
+        removeItem(value);
+      }
+    });
   }
 
   @override

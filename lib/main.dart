@@ -5,6 +5,7 @@ import 'widgets/screen/display/display_category_meals.dart';
 import 'widgets/screen/display/full_content/display_full_details_meal.dart';
 import 'widgets/screen/display/tab/display_tab.dart';
 import 'widgets/screen/display/tab/display_bottom_tab.dart';
+import 'widgets/screen/display/display_filters.dart';
 
 void main() {
   runApp(MyApp());
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
         '/': (ctx) => DisplayBottommTab(),
         DisplayCategoryMeals.routeName: (ctx) => DisplayCategoryMeals(),
         DisplayFullDetailsMeal.routeName: (ctx) => DisplayFullDetailsMeal(),
+        DisplayFilters.routeName: (ctx) => DisplayFilters(),
       },
       onGenerateRoute: (e) {
         print(e.arguments);
