@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../main/main_category.dart';
 import './tab_favorites.dart';
+import '../../../../models/meal.dart';
 
 class DisplayTab extends StatefulWidget {
-  const DisplayTab({Key? key}) : super(key: key);
+  final List<Meal> favorites;
+
+  DisplayTab({required this.favorites});
 
   @override
   _DisplayTabState createState() => _DisplayTabState();
@@ -33,7 +36,9 @@ class _DisplayTabState extends State<DisplayTab> {
           ),
           body: TabBarView(children: [
             MainCategory(),
-            TabFavorites(),
+            TabFavorites(
+              favorites: widget.favorites,
+            ),
           ]),
         ));
   }

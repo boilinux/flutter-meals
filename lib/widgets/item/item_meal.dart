@@ -7,7 +7,12 @@ import '../screen/display/full_content/display_full_details_meal.dart';
 class ItemMeal extends StatelessWidget {
   final data;
   final Function removeItem;
-  ItemMeal({required this.data, required this.removeItem});
+  final Function addFavorites;
+  ItemMeal({
+    required this.data,
+    required this.removeItem,
+    required this.addFavorites,
+  });
 
   void _selectMeal(BuildContext ctx) {
     Navigator.of(ctx).pushNamed(
@@ -21,7 +26,13 @@ class ItemMeal extends StatelessWidget {
       },
     ).then((value) {
       if (value != null) {
-        removeItem(value);
+        String _action = (value as Map)['action'];
+        String _id = (value as Map)['id'];
+        if (_action == 'delete') {
+          removeItem(_id);
+        } else if (_action == 'favorites') {
+          addFavorites(_id);
+        }
       }
     });
   }

@@ -1,6 +1,8 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 import './models/dummy_data.dart';
 import './models/meal.dart';
@@ -29,6 +31,7 @@ class _MyAppState extends State<MyApp> {
   };
 
   List<Meal> _availableMeals = DUMMY_MEALS;
+  List<Meal> _mealFavorites = [];
 
   void _setFilters(Map<String, bool> filters, BuildContext ctx) {
     setState(() {
@@ -52,6 +55,28 @@ class _MyAppState extends State<MyApp> {
     });
     showAlertDialog(ctx);
     print(_filters);
+  }
+
+  void _addFavorites(String id) {
+    setState(() {
+      // _mealFavorites.removeWhere((element) => element.id == id);
+      Meal? _m = _mealFavorites.firstWhereOrNull((e) {
+        return e.id == id;
+      });
+      if (["", null, false, 0].contains(_m)) {
+        //add
+        _m = _availableMeals.firstWhereOrNull((e) {
+          return e.id == id;
+        });
+
+        if (!["", null, false, 0].contains(_m)) {
+          _mealFavorites.add(_m!);
+        }
+      } else {
+        _mealFavorites.remove(_m);
+      }
+    });
+    inspect(_mealFavorites);
   }
 
   void showAlertDialog(BuildContext context) {
@@ -128,9 +153,12 @@ class _MyAppState extends State<MyApp> {
       ),
       routes: {
         // '/': (ctx) => DisplayTab(),
-        '/': (ctx) => DisplayBottommTab(),
+        '/': (ctx) => DisplayBottommTab(
+              favorites: _mealFavorites,
+            ),
         DisplayCategoryMeals.routeName: (ctx) => DisplayCategoryMeals(
               DUMMY_MEALS: _availableMeals,
+              addFavoritesHandler: _addFavorites,
             ),
         DisplayFullDetailsMeal.routeName: (ctx) => DisplayFullDetailsMeal(),
         DisplayFilters.routeName: (ctx) => DisplayFilters(

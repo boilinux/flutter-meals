@@ -8,7 +8,9 @@ class DisplayCategoryMeals extends StatefulWidget {
   static const routeName = '/category-meals';
 
   final List<Meal> DUMMY_MEALS;
-  DisplayCategoryMeals({required this.DUMMY_MEALS});
+  final Function addFavoritesHandler;
+  DisplayCategoryMeals(
+      {required this.DUMMY_MEALS, required this.addFavoritesHandler});
 
   @override
   _DisplayCategoryMealsState createState() => _DisplayCategoryMealsState();
@@ -42,6 +44,12 @@ class _DisplayCategoryMealsState extends State<DisplayCategoryMeals> {
     });
   }
 
+  // void _addFavorites(String id) {
+  //   setState(() {
+  //     categoryMeals.removeWhere((element) => element.id == id);
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +71,7 @@ class _DisplayCategoryMealsState extends State<DisplayCategoryMeals> {
               'color': routeArgs['color'],
             },
             removeItem: _removeItem,
+            addFavorites: widget.addFavoritesHandler,
           );
         },
         itemCount: categoryMeals.length,
