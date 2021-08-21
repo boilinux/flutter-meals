@@ -1,5 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
+import './models/dummy_data.dart';
+import './models/meal.dart';
 import 'widgets/screen/main/main_category.dart';
 import 'widgets/screen/display/display_category_meals.dart';
 import 'widgets/screen/display/full_content/display_full_details_meal.dart';
@@ -24,11 +28,63 @@ class _MyAppState extends State<MyApp> {
     'Lactose-free': false,
   };
 
-  void _setFilters(Map<String, bool> filters) {
+  List<Meal> _availableMeals = DUMMY_MEALS;
+
+  void _setFilters(Map<String, bool> filters, BuildContext ctx) {
     setState(() {
       _filters = filters;
+
+      _availableMeals = _availableMeals.where((element) {
+        if ((_filters['Gluten-free'] as bool) && !element.isGlutenFree) {
+          return false;
+        }
+        if ((_filters['Vegetarian'] as bool) && !element.isVegetarian) {
+          return false;
+        }
+        if ((_filters['Vegan'] as bool) && !element.isVegan) {
+          return false;
+        }
+        if ((_filters['Lactose-free'] as bool) && !element.isLactoseFree) {
+          return false;
+        }
+        return true;
+      }).toList();
     });
+    showAlertDialog(ctx);
     print(_filters);
+  }
+
+  void showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(
+        "Message",
+        style: TextStyle(color: Theme.of(context).primaryColor),
+      ),
+      content: Text("Successfully save!"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+          child: alert,
+        );
+      },
+    );
   }
 
   @override
@@ -73,10 +129,14 @@ class _MyAppState extends State<MyApp> {
       routes: {
         // '/': (ctx) => DisplayTab(),
         '/': (ctx) => DisplayBottommTab(),
-        DisplayCategoryMeals.routeName: (ctx) => DisplayCategoryMeals(),
+        DisplayCategoryMeals.routeName: (ctx) => DisplayCategoryMeals(
+              DUMMY_MEALS: _availableMeals,
+            ),
         DisplayFullDetailsMeal.routeName: (ctx) => DisplayFullDetailsMeal(),
-        DisplayFilters.routeName: (ctx) =>
-            DisplayFilters(setFilterHandler: _setFilters),
+        DisplayFilters.routeName: (ctx) => DisplayFilters(
+              setFilterHandler: _setFilters,
+              mainFilter: _filters,
+            ),
       },
       onGenerateRoute: (e) {
         print(e.arguments);

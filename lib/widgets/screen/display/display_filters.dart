@@ -4,20 +4,16 @@ import './drawer/main_drawer.dart';
 class DisplayFilters extends StatefulWidget {
   static const routeName = '/filters';
 
+  final Map<String, bool> mainFilter;
   final Function setFilterHandler;
-  DisplayFilters({required this.setFilterHandler});
+  DisplayFilters({required this.setFilterHandler, required this.mainFilter});
 
   @override
   _DisplayFiltersState createState() => _DisplayFiltersState();
 }
 
 class _DisplayFiltersState extends State<DisplayFilters> {
-  Map<String, bool> filters = {
-    'Gluten-free': false,
-    'Vegetarian': false,
-    'Vegan': false,
-    'Lactose-free': false,
-  };
+  // Map<String, bool> filters = widget.mainFilter;
 
   Widget _buildSwitchListTile(String title, String subtitle) {
     // bool value = filters[title] as bool;
@@ -26,14 +22,14 @@ class _DisplayFiltersState extends State<DisplayFilters> {
       subtitle: Text(subtitle),
       onChanged: (e) {
         setState(() {
-          if (filters[title] == true) {
-            filters[title] = false;
+          if (widget.mainFilter[title] == true) {
+            widget.mainFilter[title] = false;
           } else {
-            filters[title] = true;
+            widget.mainFilter[title] = true;
           }
         });
       },
-      value: (filters[title] as bool),
+      value: (widget.mainFilter[title] as bool),
     );
   }
 
@@ -81,7 +77,7 @@ class _DisplayFiltersState extends State<DisplayFilters> {
         child: Icon(
           Icons.save,
         ),
-        onPressed: () => widget.setFilterHandler(filters),
+        onPressed: () => widget.setFilterHandler(widget.mainFilter, context),
       ),
     );
   }
