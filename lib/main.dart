@@ -155,6 +155,7 @@ class _MyAppState extends State<MyApp> {
         '/': (ctx) => DisplayBottommTab(
               favorites: _mealFavorites,
               addFavoriteHandler: _addFavorites,
+              availableMeals: _availableMeals,
             ),
         DisplayCategoryMeals.routeName: (ctx) => DisplayCategoryMeals(
               DUMMY_MEALS: _availableMeals,

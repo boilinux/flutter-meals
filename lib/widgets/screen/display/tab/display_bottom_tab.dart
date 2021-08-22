@@ -7,11 +7,13 @@ import '../../../../models/meal.dart';
 
 class DisplayBottommTab extends StatefulWidget {
   final List<Meal> favorites;
+  final List<Meal> availableMeals;
   final Function addFavoriteHandler;
 
   DisplayBottommTab({
     required this.favorites,
     required this.addFavoriteHandler,
+    required this.availableMeals,
   });
 
   @override
@@ -31,7 +33,7 @@ class _DisplayBottommTabState extends State<DisplayBottommTab> {
       {
         'page': TabFavorites(
           mealFavorites: widget.favorites,
-          addFavoritesHandler: widget.addFavoriteHandler,
+          availableMeals: widget.availableMeals,
         ),
         'title': 'Your Favorites',
       },
