@@ -162,7 +162,9 @@ class _MyAppState extends State<MyApp> {
               addFavoritesHandler: _addFavorites,
               mealFavorites: _mealFavorites,
             ),
-        DisplayFullDetailsMeal.routeName: (ctx) => DisplayFullDetailsMeal(),
+        DisplayFullDetailsMeal.routeName: (ctx) => DisplayFullDetailsMeal(
+              mealFavorites: _mealFavorites,
+            ),
         DisplayFilters.routeName: (ctx) => DisplayFilters(
               setFilterHandler: _setFilters,
               mainFilter: _filters,

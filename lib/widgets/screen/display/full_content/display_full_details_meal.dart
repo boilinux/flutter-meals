@@ -10,6 +10,9 @@ import '../../../../models/meal.dart';
 class DisplayFullDetailsMeal extends StatefulWidget {
   static const routeName = '/full-details';
 
+  final List<Meal> mealFavorites;
+  DisplayFullDetailsMeal({required this.mealFavorites});
+
   @override
   _DisplayFullDetailsMealState createState() => _DisplayFullDetailsMealState();
 }
@@ -28,6 +31,22 @@ class _DisplayFullDetailsMealState extends State<DisplayFullDetailsMeal> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+  }
+
+  void _addFavorites(String id, Meal availableMeals) {
+    setState(() {
+      // _mealFavorites.removeWhere((element) => element.id == id);
+      Meal? _m = widget.mealFavorites.firstWhereOrNull((e) {
+        return e.id == id;
+      });
+      if (["", null, false, 0].contains(_m)) {
+        //add
+        widget.mealFavorites.add(availableMeals);
+      } else {
+        widget.mealFavorites.remove(_m);
+      }
+    });
+    inspect(widget.mealFavorites);
   }
 
   Widget buildContainer(Widget child) {
@@ -57,6 +76,8 @@ class _DisplayFullDetailsMealState extends State<DisplayFullDetailsMeal> {
     List<Meal> _tempFavorite = routeArgs['meal_favorites'];
     bool _isFavorite = false;
 
+    print("{$data['action'] action}");
+
     if (_tempFavorite.isNotEmpty) {
       Meal? _m = _tempFavorite.firstWhereOrNull((e) {
         return e.id == data['id'];
@@ -68,11 +89,11 @@ class _DisplayFullDetailsMealState extends State<DisplayFullDetailsMeal> {
 
       // inspect(_tempFavorite);
     } else {
-      print('empty');
+      // print('empty');
       _isFavorite = false;
     }
-    print('tempFavorites');
-    inspect(_tempFavorite);
+    // print('tempFavorites');
+    // inspect(_tempFavorite);
 
     return Scaffold(
       appBar: AppBar(
@@ -144,8 +165,12 @@ class _DisplayFullDetailsMealState extends State<DisplayFullDetailsMeal> {
                     _isFavorite ? Colors.white : Theme.of(context).primaryColor,
               ),
               onPressed: () {
-                Navigator.of(context)
-                    .pop({'id': data['id'], 'action': 'favorites'});
+                if (data['action'] == 'display_category') {
+                  _addFavorites(data['id'], categoryMeals);
+                } else if (data['action'] == 'tab_favorites') {
+                  Navigator.of(context)
+                      .pop({'id': data['id'], 'action': 'favorites'});
+                }
               },
             ),
             FloatingActionButton(

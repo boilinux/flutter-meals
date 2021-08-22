@@ -69,6 +69,7 @@ class _TabFavoritesState extends State<TabFavorites> {
               'affordability': meal.affordability,
               'complexity': meal.complexity,
               'color': Colors.pink,
+              'action': 'tab_favorites',
             },
             removeItem: _removeItem,
             addFavorites: _addFavorites,

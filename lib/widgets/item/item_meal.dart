@@ -25,6 +25,7 @@ class ItemMeal extends StatelessWidget {
           'id': data['id'],
           'title': data['title'],
           'color': data['color'],
+          'action': data['action'],
         },
         'meal_favorites': mealFavorites,
       },

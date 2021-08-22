@@ -74,6 +74,7 @@ class _DisplayCategoryMealsState extends State<DisplayCategoryMeals> {
               'affordability': meal.affordability,
               'complexity': meal.complexity,
               'color': routeArgs['color'],
+              'action': 'display_category',
             },
             removeItem: _removeItem,
             addFavorites: widget.addFavoritesHandler,
