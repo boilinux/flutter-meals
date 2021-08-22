@@ -9,8 +9,13 @@ class DisplayCategoryMeals extends StatefulWidget {
 
   final List<Meal> DUMMY_MEALS;
   final Function addFavoritesHandler;
-  DisplayCategoryMeals(
-      {required this.DUMMY_MEALS, required this.addFavoritesHandler});
+  final List<Meal> mealFavorites;
+
+  DisplayCategoryMeals({
+    required this.DUMMY_MEALS,
+    required this.addFavoritesHandler,
+    required this.mealFavorites,
+  });
 
   @override
   _DisplayCategoryMealsState createState() => _DisplayCategoryMealsState();
@@ -72,6 +77,7 @@ class _DisplayCategoryMealsState extends State<DisplayCategoryMeals> {
             },
             removeItem: _removeItem,
             addFavorites: widget.addFavoritesHandler,
+            mealFavorites: widget.mealFavorites,
           );
         },
         itemCount: categoryMeals.length,

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ import './models/meal.dart';
 import 'widgets/screen/main/main_category.dart';
 import 'widgets/screen/display/display_category_meals.dart';
 import 'widgets/screen/display/full_content/display_full_details_meal.dart';
-import 'widgets/screen/display/tab/display_tab.dart';
+// import 'widgets/screen/display/tab/display_tab.dart.bak';
 import 'widgets/screen/display/tab/display_bottom_tab.dart';
 import 'widgets/screen/display/display_filters.dart';
 
@@ -76,7 +75,7 @@ class _MyAppState extends State<MyApp> {
         _mealFavorites.remove(_m);
       }
     });
-    inspect(_mealFavorites);
+    // inspect(_mealFavorites);
   }
 
   void showAlertDialog(BuildContext context) {
@@ -155,10 +154,12 @@ class _MyAppState extends State<MyApp> {
         // '/': (ctx) => DisplayTab(),
         '/': (ctx) => DisplayBottommTab(
               favorites: _mealFavorites,
+              addFavoriteHandler: _addFavorites,
             ),
         DisplayCategoryMeals.routeName: (ctx) => DisplayCategoryMeals(
               DUMMY_MEALS: _availableMeals,
               addFavoritesHandler: _addFavorites,
+              mealFavorites: _mealFavorites,
             ),
         DisplayFullDetailsMeal.routeName: (ctx) => DisplayFullDetailsMeal(),
         DisplayFilters.routeName: (ctx) => DisplayFilters(

@@ -1,33 +1,45 @@
 import 'package:flutter/material.dart';
 
 import '../../../../models/meal.dart';
-import '../../../screen/display/display_image_meal.dart';
-import '../../../screen/display/display_title_meal.dart';
-import '../../../screen/display/display_info_meal.dart';
+import '../../../item/item_meal.dart';
 
 class TabFavorites extends StatelessWidget {
-  final List<Meal> favorites;
-  TabFavorites({required this.favorites});
+  final Function addFavoritesHandler;
+  final List<Meal> mealFavorites;
+
+  TabFavorites({
+    required this.addFavoritesHandler,
+    required this.mealFavorites,
+  });
 
   @override
   Widget build(BuildContext context) {
-    print(favorites);
+    print(mealFavorites);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
       elevation: 4,
       margin: EdgeInsets.all(10),
-      child: Column(
-        children: [
-          // Stack(
-          //   children: [
-          //     DisplayImageMeal(data: data),
-          //     DisplayTitleMeal(data: data),
-          //   ],
-          // ),
-          // DisplayInfoMeal(data: data),
-        ],
+      child: ListView.builder(
+        itemBuilder: (ctx, index) {
+          final meal = mealFavorites[index];
+          return ItemMeal(
+            data: {
+              'id': meal.id,
+              'title': meal.title,
+              'imageUrl': meal.imageUrl,
+              'duration': meal.duration,
+              'affordability': meal.affordability,
+              'complexity': meal.complexity,
+              'color': Colors.pink,
+            },
+            removeItem: () {},
+            addFavorites: addFavoritesHandler,
+            mealFavorites: mealFavorites,
+          );
+        },
+        itemCount: mealFavorites.length,
       ),
     );
   }

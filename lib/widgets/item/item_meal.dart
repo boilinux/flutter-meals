@@ -3,15 +3,18 @@ import '../screen/display/display_image_meal.dart';
 import '../screen/display/display_title_meal.dart';
 import '../screen/display/display_info_meal.dart';
 import '../screen/display/full_content/display_full_details_meal.dart';
+import '../../models/meal.dart';
 
 class ItemMeal extends StatelessWidget {
   final data;
   final Function removeItem;
   final Function addFavorites;
+  final List<Meal> mealFavorites;
   ItemMeal({
     required this.data,
     required this.removeItem,
     required this.addFavorites,
+    required this.mealFavorites,
   });
 
   void _selectMeal(BuildContext ctx) {
@@ -23,11 +26,12 @@ class ItemMeal extends StatelessWidget {
           'title': data['title'],
           'color': data['color'],
         },
+        'meal_favorites': mealFavorites,
       },
     ).then((value) {
       if (value != null) {
         String _action = (value as Map)['action'];
-        String _id = (value as Map)['id'];
+        String _id = (value)['id'];
         if (_action == 'delete') {
           removeItem(_id);
         } else if (_action == 'favorites') {

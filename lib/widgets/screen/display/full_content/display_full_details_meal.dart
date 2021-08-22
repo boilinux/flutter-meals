@@ -1,11 +1,20 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 import '../../../item/item_meal.dart';
 import '../../../../models/dummy_data.dart';
+import '../../../../models/meal.dart';
 
-class DisplayFullDetailsMeal extends StatelessWidget {
+class DisplayFullDetailsMeal extends StatefulWidget {
   static const routeName = '/full-details';
 
+  @override
+  _DisplayFullDetailsMealState createState() => _DisplayFullDetailsMealState();
+}
+
+class _DisplayFullDetailsMealState extends State<DisplayFullDetailsMeal> {
   Widget buildSectionTitle(BuildContext context, String title) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -14,6 +23,11 @@ class DisplayFullDetailsMeal extends StatelessWidget {
         style: Theme.of(context).textTheme.headline6,
       ),
     );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   }
 
   Widget buildContainer(Widget child) {
@@ -40,6 +54,25 @@ class DisplayFullDetailsMeal extends StatelessWidget {
     final categoryMeals = DUMMY_MEALS.firstWhere((e) {
       return e.id == data['id'];
     });
+    List<Meal> _tempFavorite = routeArgs['meal_favorites'];
+    bool _isFavorite = false;
+
+    if (_tempFavorite.isNotEmpty) {
+      Meal? _m = _tempFavorite.firstWhereOrNull((e) {
+        return e.id == data['id'];
+      });
+
+      if (_m != null) {
+        _isFavorite = true;
+      }
+
+      // inspect(_tempFavorite);
+    } else {
+      print('empty');
+      _isFavorite = false;
+    }
+    print('tempFavorites');
+    inspect(_tempFavorite);
 
     return Scaffold(
       appBar: AppBar(
@@ -107,6 +140,8 @@ class DisplayFullDetailsMeal extends StatelessWidget {
               heroTag: null,
               child: Icon(
                 Icons.star,
+                color:
+                    _isFavorite ? Colors.white : Theme.of(context).primaryColor,
               ),
               onPressed: () {
                 Navigator.of(context)
